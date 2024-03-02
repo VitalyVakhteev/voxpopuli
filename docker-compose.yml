@@ -1,12 +1,13 @@
 version: '3.8'
 services:
   voxpopuli-app:
-    image: voxpopuli:latest
+    image: voxpopuli-app:latest
     environment:
-      IMGUR_CLIENT_ID: ebe6b4dfec2596a
+#      IMGUR_CLIENT_ID: ebe6b4dfec2596a
       SPRING_DATASOURCE_URL: jdbc:postgresql://voxpopuli-db:5432/voxpopuli
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: voxpopuli_postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
       - "8080:8080"
     depends_on:

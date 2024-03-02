@@ -1,5 +1,6 @@
 package com.voxpopuli.voxpopuli;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class Poll {
     private LocalDateTime endTime;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Option> options = new HashSet<>();
 
     public Poll(String name, String description, LocalDateTime startTime, LocalDateTime endTime) {

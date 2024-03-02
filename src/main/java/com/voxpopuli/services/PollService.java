@@ -30,7 +30,9 @@ public class PollService {
         return pollRepository.findById(id).orElseThrow(() -> new RuntimeException("Poll not found with id: " + id));
     }
 
+    @Transactional
     public Poll savePoll(Poll poll) {
+        poll.getOptions().forEach(option -> option.setPoll(poll));
         return pollRepository.save(poll);
     }
 
