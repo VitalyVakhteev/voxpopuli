@@ -5,29 +5,31 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Set;
 
 @Entity
-@Table(name = "option")
+@Table(name = "comment")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Option {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String username;
 
-    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL)
-    private Set<Vote> votes;
+    @Column(length = 1024)
+    private String text;
 
     @ManyToOne
+    @JoinColumn(name = "poll_id")
     @JsonBackReference
     private Poll poll;
 
-    public Option(String description) {
-        this.description = description;
+    public Comment(String username, String text, Poll poll) {
+        this.username = username;
+        this.text = text;
+        this.poll = poll;
     }
 }

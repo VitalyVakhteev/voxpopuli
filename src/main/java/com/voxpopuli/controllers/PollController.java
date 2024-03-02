@@ -1,6 +1,7 @@
 package com.voxpopuli.controllers;
 
 import com.voxpopuli.services.PollService;
+import com.voxpopuli.voxpopuli.Comment;
 import com.voxpopuli.voxpopuli.Option;
 import com.voxpopuli.voxpopuli.Poll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,20 @@ public class PollController {
     }
 
     @PostMapping("/options/{optionId}/vote")
-    public ResponseEntity<Option> vote(@PathVariable Long optionId) {
-        Option updatedOption = pollService.vote(optionId);
+    public ResponseEntity<Option> vote(@PathVariable Long optionId, @RequestParam String username) {
+        Option updatedOption = pollService.vote(optionId, username);
         return ResponseEntity.ok(updatedOption);
+    }
+
+    @GetMapping("/{pollId}/comments")
+    public ResponseEntity<List<Comment>> getCommentsForPoll(@PathVariable Long pollId) {
+        List<Comment> comments = pollService.getCommentsForPoll(pollId);
+        return ResponseEntity.ok(comments);
+    }
+
+    @PostMapping("/{pollId}/comments")
+    public ResponseEntity<Comment> addCommentToPoll(@PathVariable Long pollId, @RequestBody Comment comment) {
+        Comment newComment = pollService.addCommentToPoll(pollId, comment);
+        return ResponseEntity.ok(newComment);
     }
 }
