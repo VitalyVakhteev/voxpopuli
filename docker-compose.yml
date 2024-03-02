@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  voxpopuli-app:
+    image: voxpopuli:latest
+    environment:
+      IMGUR_CLIENT_ID: ebe6b4dfec2596a
+      SPRING_DATASOURCE_URL: jdbc:postgresql://voxpopuli-db:5432/voxpopuli
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: voxpopuli_postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - voxpopuli-db
+  voxpopuli-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: voxpopuli
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: voxpopuli_postgres # Adjust as needed
+    ports:
+      - "8432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d/
+volumes:
+  postgres-data:
