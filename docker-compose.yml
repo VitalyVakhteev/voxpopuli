@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   voxpopuli-app:
-    image: voxpopuli-app:latest
+    image: vitalyv3/voxpopuli-app:latest
     environment:
 #      IMGUR_CLIENT_ID: ebe6b4dfec2596a
       SPRING_DATASOURCE_URL: jdbc:postgresql://voxpopuli-db:5432/voxpopuli
