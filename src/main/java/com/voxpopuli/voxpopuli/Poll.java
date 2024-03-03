@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "poll")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,6 +34,10 @@ public class Poll {
     @JsonManagedReference
     private Set<Option> options = new HashSet<>();
 
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Comment> comments = new HashSet<>();
+
     public Poll(String name, String description, LocalDateTime startTime, LocalDateTime endTime) {
         this.name = name;
         this.description = description;
@@ -48,5 +53,15 @@ public class Poll {
     public void removeOption(Option option) {
         options.remove(option);
         option.setPoll(null);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setPoll(this);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setPoll(null);
     }
 }
