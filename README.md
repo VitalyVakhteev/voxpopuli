@@ -12,4 +12,5 @@ After the backend is setup, simply run the frontend development server from the 
 
 # Credits
 Vitaly Vakhteev - Backend API, original frontend code
+
 Marc Hyeler, Seon Mo Kim - Svelte Frontend Code
