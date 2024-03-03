@@ -3,10 +3,9 @@
     import axios from 'axios';
     import { goto } from "$app/navigation";
 
-    import {isLoggedIn} from "$lib/Store.js";
-    import {currentUsername} from "$lib/Store.js";
-
-    const apiURL = 'http://localhost:8080/api' //todo change this for deployment
+    import {isLoggedIn} from "../../lib/Store";
+    import {currentUsername} from "../../lib/Store";
+    import { apiURL } from "../../lib/Store";
 
 
     import '$lib/assets/global.css'

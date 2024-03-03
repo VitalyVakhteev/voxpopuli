@@ -30,4 +30,14 @@ public class UserService {
         userRepository.save(newUser);
         return true;
     }
+
+    public boolean resetPassword(String username, String oldPassword, String newPassword) {
+        User user = userRepository.findByUsername(username);
+        if (user != null && BCrypt.checkpw(oldPassword, user.getHashedPwd())) {
+            user.setHashedPwd(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }

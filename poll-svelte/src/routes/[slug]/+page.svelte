@@ -3,8 +3,9 @@
     import axios from 'axios';
 
     import { goto } from '$app/navigation';
+    import { apiURL } from '../../lib/Store';
 
-    import {currentID, currentPoll, currentUsername, hasVoted} from "$lib/Store.js";
+    import {currentID, currentPoll, currentUsername, hasVoted} from "../../lib/Store.js";
 
     let poll;
     let comments = [];
@@ -13,7 +14,6 @@
 
     let username = $currentUsername;
     let id;
-    const apiURL = 'https://voxpopuli.lol/api'; // Change this for deployment
 
     export let data;
 

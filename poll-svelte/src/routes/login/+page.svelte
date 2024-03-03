@@ -2,11 +2,9 @@
     import axios from 'axios';
     import { goto } from "$app/navigation";
 
-    import {isLoggedIn} from "$lib/Store.js";
-    import {currentUsername} from "$lib/Store.js";
-
-    const apiURL = 'http://localhost:8080/api'
-
+    import {isLoggedIn} from "../../lib/Store";
+    import {currentUsername} from "../../lib/Store";
+    import { apiURL } from "../../lib/Store";
 
     import '$lib/assets/global.css'
     let username = '';
@@ -86,6 +84,9 @@
     .register-content-p{
         margin: 0;
     }
+    .reset-content-p{
+      margin-bottom: 20px;
+    }
   </style>
   <div id="login-parent">
     <h2 class="login-header">Login</h2>
@@ -102,6 +103,9 @@
         <input type="password" bind:value={password}/>
       </div>
       <p class="register-content-p" style="color: blue; margin-top: 20px;">
+        Forgot your password? <a href="/reset_password">Reset it here</a>
+      </p>
+      <p class="reset-content-p" style="color: blue; margin-top: 20px;">
         Don't have an account? <a href="/register">Register</a>
       </p>
       <button id="submit-button-button" type="submit" on:click={login}>Login</button>

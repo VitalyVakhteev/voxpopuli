@@ -1,11 +1,9 @@
 <script>
     import { onMount } from 'svelte';
+    import { apiURL } from "$lib/Store";
     import axios from "axios";
     import Bar from "./bar.svelte";
     import { currentPoll, currentID } from "$lib/Store.js";
-
-    const apiURL = 'https://voxpopuli.lol/api'; // Change this for deployment
-
     let pollPromise;
     let visible = false;
 

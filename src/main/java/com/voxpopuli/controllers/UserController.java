@@ -3,6 +3,7 @@ package com.voxpopuli.controllers;
 import com.voxpopuli.services.UserService;
 import com.voxpopuli.voxpopuli.LoginRequest;
 import com.voxpopuli.voxpopuli.RegisterRequest;
+import com.voxpopuli.voxpopuli.ResetPasswordRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,16 @@ public class UserController {
             return ResponseEntity.ok().body("User registered successfully");
         } else {
             return ResponseEntity.badRequest().body("Username already exists");
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+        boolean isReset = userService.resetPassword(resetPasswordRequest.getResetUsername(), resetPasswordRequest.getOldPassword(), resetPasswordRequest.getNewPassword());
+        if (isReset) {
+            return ResponseEntity.ok().body("Password reset successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to reset password");
         }
     }
 }

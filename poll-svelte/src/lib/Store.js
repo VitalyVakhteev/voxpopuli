@@ -53,3 +53,6 @@ export const showModal = writable(false);
 export const isLoggedIn = writable(false);
 export const hasVoted = writable(false);
 export const currentID = writable(0);
+export const apiURL = 'https://voxpopuli.lol/api'; // Todo: Change this for deployment;
+// use 'https://voxpopuli.lol/api'
+// else 'http://localhost:8080/api'

@@ -1,13 +1,10 @@
 <script>
-    import '$lib/assets/global.css'
+    import '../lib/assets/global.css'
     import axios from 'axios';
-    import CreateModal from "$lib/components/CreateModal.svelte";
-
-    const apiURL = 'http://localhost:8080/api' //todo change this for deployment
-
+    import CreateModal from "../lib/components/CreateModal.svelte";
     import { onMount } from 'svelte';
-
-    import {showModal} from "$lib/Store.js";
+    import {showModal} from "../lib/Store";
+    import { apiURL } from "../lib/Store";
 
     let polls = [];
 

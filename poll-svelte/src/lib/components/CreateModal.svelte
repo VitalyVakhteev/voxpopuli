@@ -1,10 +1,8 @@
 <script>
     import '$lib/assets/global.css';
     import axios from 'axios';
+    import { apiURL } from '$lib/Store';
     let options = ['', ''];
-
-    const apiURL = 'http://localhost:8080/api' //todo change this for deployment
-
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
