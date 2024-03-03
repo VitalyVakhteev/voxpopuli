@@ -64,11 +64,13 @@ public class PollService {
             throw new RuntimeException("Voting is closed for this poll.");
         }
         boolean hasVoted = poll.getOptions().stream()
-                .anyMatch(opt -> opt.getVotes().stream()
-                        .anyMatch(vote -> vote.getUsername().equals(username)));
+                .flatMap(opt -> opt.getVotes().stream())
+                .anyMatch(vote -> vote.getUsername().equals(username) && vote.getOption().getPoll().getId().equals(poll.getId()));
+
         if (hasVoted) {
             throw new RuntimeException("User has already voted in this poll.");
         }
+
         Vote vote = new Vote(option, username);
         option.getVotes().add(vote);
         return optionRepository.save(option);

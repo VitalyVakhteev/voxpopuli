@@ -18,9 +18,9 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /home/app/target/voxpopuli-0.0.1.jar /app/voxpopuli-0.0.1.jar
+COPY --from=build /home/app/target/voxpopuli-0.0.2.jar /app/voxpopuli-0.0.2.jar
 
 EXPOSE 8080
 
 # Define the entry point that runs the application
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","voxpopuli-0.0.1.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","voxpopuli-0.0.2.jar"]

@@ -2,9 +2,12 @@
 An open-source polling system. Built in an 9-hour hackathon on March 2nd.
 
 # Plans
-- Fix voting bug introduced in hackathon
 - Deploy Svelte to production
 - Password Forgotten Feature
+
+# Patch Notes
+### 0.0.2
+- Fixed an issue where a user cannot vote on multiple polls once they have voted on only one
 
 # Building
 The backend runs on Java, using dependencies like SpringBoot and BCrypt. Make sure to install these dependencies with Maven.
