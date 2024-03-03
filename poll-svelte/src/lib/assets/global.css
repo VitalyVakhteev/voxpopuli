@@ -1,0 +1,30 @@
+:root {
+    --text: #d6d6d6;
+    --background: #101014;
+    --primary: #0084ff;
+    --secondary: #8571a8;
+    --accent: #577db2;
+    --cont-background: #00284d;
+    --option-color: rgb(60, 60, 167);
+    --submit-button: rgb(14, 157, 74);
+}
+
+*{
+    color: var(--text);
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+body{
+    background-color: var(--background);
+}
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24
+ }
