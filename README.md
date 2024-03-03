@@ -1,6 +1,10 @@
 # VoxPopuli
 An open-source polling system. Built in an 9-hour hackathon on March 2nd.
 
+# Plans
+- Fix voting bug introduced in hackathon
+- Deploy Svelte to production
+
 # Building
 The backend runs on Java, using dependencies like SpringBoot and BCrypt. Make sure to install these dependencies with Maven.
 
