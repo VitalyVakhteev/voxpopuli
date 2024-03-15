@@ -36,7 +36,6 @@
             return;
         }
 
-        console.log("toest")
         try {
             const newPoll = {
                 name: pollTitle,

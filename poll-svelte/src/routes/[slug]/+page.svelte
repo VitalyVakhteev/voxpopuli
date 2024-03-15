@@ -25,7 +25,6 @@
             axios.get(`${apiURL}/polls/${id}`)
                 .then(response => {
                     poll = response.data;
-                    console.log(poll)
                     currentPoll.set(poll)
                 })
                 .catch(error => {
@@ -47,11 +46,9 @@
     }
 
     async function vote(optionId) {
-        console.log(optionId);
         if (!username) {
-
             errorMessage = "You must be logged in to vote.";
-            await goto('/login')
+            await goto('/login');
             return;
         }
 
@@ -60,8 +57,13 @@
             hasVoted.set(true);
             await fetchData();
         } catch (error) {
-            console.error(error);
-            errorMessage = "You have already voted in this poll.";
+            console.error('Voting error:', error);
+
+            if (error.response && error.response.data) {
+                errorMessage = error.response.data;
+            } else {
+                errorMessage = "An unexpected error occurred. Please try again later.";
+            }
         }
     }
 
@@ -222,7 +224,7 @@
             <div>Loading...</div>
         {/if}
         {#if errorMessage}
-            <p style="color: red;">{errorMessage}</p>
+            <p style="color: red; font-weight: bold;">{errorMessage}</p>
         {/if}
     </div>
 

@@ -5,6 +5,7 @@ import com.voxpopuli.voxpopuli.Comment;
 import com.voxpopuli.voxpopuli.Option;
 import com.voxpopuli.voxpopuli.Poll;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,10 @@ public class PollController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Poll>> getAllPolls() {
-        List<Poll> polls = pollService.getAllPolls();
+    public ResponseEntity<Page<Poll>> getAllPolls(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
+        Page<Poll> polls = pollService.getAllPolls(page, size);
         return ResponseEntity.ok(polls);
     }
 

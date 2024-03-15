@@ -3,32 +3,46 @@
     import axios from 'axios';
     import CreateModal from "../lib/components/CreateModal.svelte";
     import { onMount } from 'svelte';
+    import { writable } from 'svelte/store';
     import {showModal} from "../lib/Store";
     import { apiURL } from "../lib/Store";
 
-    let polls = [];
+    let currentPage = 1;
+    let pageSize = 5;
+    let totalPages = 0;
+    let polls = writable([]);
 
     function myEventHandler(e) {
-        console.log("test")
         fetchPolls();
     }
 
-    export async function fetchPolls() {
+    export async function fetchPolls(page = currentPage, size = pageSize) {
         try {
-            const response = await axios.get(`${apiURL}/polls`);
-            polls = response.data;
+            const response = await axios.get(`${apiURL}/polls?page=${page - 1}&size=${size}`);
+            polls.set(response.data.content);
+            totalPages = response.data.totalPages;
+            currentPage = response.data.number + 1;
         } catch (error) {
             console.error('Error fetching polls:', error);
             throw error;
         }
     }
 
+    function goToNextPage() {
+        if (currentPage < totalPages) {
+            fetchPolls(currentPage + 1);
+        }
+    }
 
+    function goToPreviousPage() {
+        if (currentPage > 1) {
+            fetchPolls(currentPage - 1);
+        }
+    }
 
     onMount(async () => {
         try {
            await fetchPolls();
-            console.log(polls)
         } catch (error) {
             console.error('Error fetching polls:', error);
         }
@@ -115,7 +129,7 @@
 
 
     <div class="poll-container">
-        {#each polls as poll}
+        {#each $polls as poll}
             <a href="/{poll.id}">
                 <div class="poll-item">
                     <h2 class="poll-title">{poll.name}</h2>
@@ -125,4 +139,12 @@
             </a>
         {/each}
     </div>
+
+    {#if totalPages > 1}
+    <div class="pagination-controls">
+        <button on:click={goToPreviousPage} disabled={currentPage === 1}>Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button on:click={goToNextPage} disabled={currentPage === totalPages}>Next</button>
+    </div>
+    {/if}
 </div>

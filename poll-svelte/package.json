@@ -1,6 +1,6 @@
 {
   "name": "poll-svelte",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "scripts": {
     "dev": "cross-env API_URL=http://localhost:8080/api vite dev",
